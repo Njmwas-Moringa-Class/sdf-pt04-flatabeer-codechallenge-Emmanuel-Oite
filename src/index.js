@@ -1,4 +1,5 @@
 // Code here
+// Define the base URL where we'll be making requests to retrieve data
 document.addEventListener('DOMContentLoaded', () => {
   const baseUrl = 'http://localhost:3000'; // Update if needed
   const beerList = document.getElementById('beer-list');
@@ -15,11 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(`${baseUrl}/beers/1`)
     .then((response) => response.json())
     .then((beer) => {
+      // Update the displayed information with data from the server
       beerName.textContent = beer.name;
       beerImage.src = beer.image_url;
       beerDescription.textContent = beer.description;
 
-      // Clear review list and populate with fetched reviews
+      // Clear the review list and addfetched reviews
       reviewList.innerHTML = '';
       beer.reviews.forEach((review) => {
         const li = document.createElement('li');
@@ -77,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
       li.textContent = newReview;
       reviewList.appendChild(li);
       reviewInput.value = ''; // Clear the input field
-      // You can add code here to post the review to the server
     }
   });
 });
