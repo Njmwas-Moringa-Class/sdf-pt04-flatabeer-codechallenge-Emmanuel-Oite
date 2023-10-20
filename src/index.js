@@ -1,7 +1,8 @@
 // Code here
-// Define the base URL where we'll be making requests to retrieve data
+// Define the base URL for Fetch requests
 document.addEventListener('DOMContentLoaded', () => {
-  const baseUrl = 'http://localhost:3000'; // Update if needed
+  const baseUrl = 'http://localhost:3000';
+  //Declarations to HTML elements
   const beerList = document.getElementById('beer-list');
   const beerName = document.getElementById('beer-name');
   const beerImage = document.getElementById('beer-image');
@@ -16,12 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(`${baseUrl}/beers/1`)
     .then((response) => response.json())
     .then((beer) => {
-      // Update the displayed information with data from the server
       beerName.textContent = beer.name;
       beerImage.src = beer.image_url;
       beerDescription.textContent = beer.description;
-
-      // Clear the review list and addfetched reviews
       reviewList.innerHTML = '';
       beer.reviews.forEach((review) => {
         const li = document.createElement('li');
@@ -45,13 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch((error) => console.error('Error fetching beer list:', error));
 
-  // Function to display beer details in the main section
+  // Function to show the beer details
   function displayBeerDetails(beer) {
     beerName.textContent = beer.name;
     beerImage.src = beer.image_url;
     beerDescription.textContent = beer.description;
-
-    // Clear review list and populate with the selected beer's reviews
     reviewList.innerHTML = '';
     beer.reviews.forEach((review) => {
       const li = document.createElement('li');
@@ -59,14 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
       reviewList.appendChild(li);
     });
   }
-
-  // Handle description form submission
   descriptionForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const newDescription = descriptionInput.value;
     if (newDescription) {
       beerDescription.textContent = newDescription;
-      // You can add code here to update the description on the server
     }
   });
 
